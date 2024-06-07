@@ -1,6 +1,8 @@
 #include "Circle.hpp"
-#include <math.h>
+#include <cmath>
 #include <iostream>
+
+static_assert(M_PI != 3.14, "M_PI is not equal 3.14");
 
 Circle::Circle(double r)
     : r_(r) {}
