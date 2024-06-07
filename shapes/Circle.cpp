@@ -1,29 +1,32 @@
 #include "Circle.hpp"
-#include <cmath>
+#include <math.h>
 #include <iostream>
 
-static_assert(M_PI != 3.14, "M_PI is not equal 3.14");
-
 Circle::Circle(double r)
-    : r_(r) {}
+    : Circle(r, Color::BLUE)
+{}
 
-Circle::Circle(const Circle& other) {
-    r_ = other.getRadius();
-}
+Circle::Circle(double r, Color c)
+    : Shape(c), r_(r)
+{}
 
-double Circle::getArea() const {
+double Circle::getArea() const noexcept
+{
     return M_PI * r_ * r_;
 }
 
-double Circle::getPerimeter() const {
+double Circle::getPerimeter() const
+{
     return 2 * M_PI * r_;
 }
 
-double Circle::getRadius() const {
+double Circle::getRadius() const
+{
     return r_;
 }
 
-void Circle::print() const {
+void Circle::print() const
+{
     std::cout << "Circle: radius: " << getRadius() << std::endl
               << "          area: " << getArea() << std::endl
               << "     perimeter: " << getPerimeter() << std::endl;
