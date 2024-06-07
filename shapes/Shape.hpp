@@ -1,17 +1,23 @@
 #pragma once
 
-enum class Color : unsigned char{
-    White = 0,
-    Red,
-    Blue
+enum class Color : unsigned char
+{
+    RED,
+    BLUE,
+    GREEN
 };
 
-class Shape {
-    Color color = Color::White;
+class Shape
+{
 public:
     virtual ~Shape() {}
+    Shape() = default;
+    Shape(Color c);
 
-    virtual double getArea() const = 0;
+    virtual double getArea() const noexcept = 0;
     virtual double getPerimeter() const = 0;
     virtual void print() const;
+
+protected:
+    Color color = Color::RED;
 };
