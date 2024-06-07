@@ -1,6 +1,13 @@
 #pragma once
 
+enum class Color : unsigned char{
+    White = 0,
+    Red,
+    Blue
+};
+
 class Shape {
+    Color color = Color::White;
 public:
     virtual ~Shape() {}
 
