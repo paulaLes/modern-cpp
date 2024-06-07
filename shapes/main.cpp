@@ -12,35 +12,23 @@ using namespace std;
 
 typedef vector<shared_ptr<Shape>> Collection;
 
-
-template<class DerivedType, class... Arguments>
-std::shared_ptr<Shape> make_shape(Arguments&&... args) {
-    return std::make_shared<DerivedType>(std::forward<Arguments>(args)...);
+bool sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second) {
+    if (first == nullptr || second == nullptr)
+        return false;
+    return (first->getArea() < second->getArea());
 }
 
-
-template<typename T, typename = std::enable_if_t<std::is_base_of<Shape, T>::value>>
-void addShape(std::shared_ptr<T> shape, std::vector<std::shared_ptr<Shape>>& collection) {
-    collection.push_back(shape);
+bool perimeterBiggerThan20(shared_ptr<Shape> s) {
+    if (s)
+        return (s->getPerimeter() > 20);
+    return false;
 }
 
-//bool sortByArea(shared_ptr<Shape> first, shared_ptr<Shape> second) {
-   // if (first == NULL || second == NULL)
-   //     return false;
- //   return (first->getArea() < second->getArea());
-//}
-
-//bool perimeterBiggerThan20(shared_ptr<Shape> s) {
-//    if (s)
-//        return (s->getPerimeter() > 20);
-//    return false;
-//}
-
-//bool areaLessThan10(shared_ptr<Shape> s) {
-//    if (s)
-//        return (s->getArea() < 10);
-//    return false;
-//}
+bool areaLessThan10(shared_ptr<Shape> s) {
+    if (s)
+        return (s->getArea() < 10);
+    return false;
+}
 
 void printCollectionElements(const Collection& collection) {
     for (Collection::const_iterator it = collection.begin(); it != collection.end(); ++it)
@@ -58,7 +46,7 @@ void findFirstShapeMatchingPredicate(const Collection& collection,
                                      bool (*predicate)(shared_ptr<Shape> s),
                                      std::string info) {
     Collection::const_iterator iter = std::find_if(collection.begin(), collection.end(), predicate);
-    if (*iter != 0) {
+    if (*iter != nullptr) {
         cout << "First shape matching predicate: " << info << endl;
         (*iter)->print();
     } else {
@@ -76,19 +64,6 @@ int main() {
     shapes.push_back(make_shared<Square>(3.0));
     shapes.push_back(make_shared<Circle>(4.0));
     printCollectionElements(shapes);
-
-    auto sortByArea =  {
-        return first != nullptr && second != nullptr && first->getArea() < second->getArea();
-    };
-
-    auto perimeterBiggerThan20 =  {
-        return s != nullptr && s->getPerimeter() > 20;
-    };
-
-    int x = 10;
-    auto areaLessThanX = x {
-        return s != nullptr && s->getArea() < x;
-    };
 
     cout << "Areas before sort: " << std::endl;
     printAreas(shapes);
